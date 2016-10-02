@@ -7,3 +7,8 @@ gem "pry"
 gem "rake"
 gem "minitest"
 gem "minitest-reporters"
+gem "jimson"
+
+group :test do
+  gem "rack-minitest"
+end
