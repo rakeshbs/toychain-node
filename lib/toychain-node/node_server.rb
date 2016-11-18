@@ -1,8 +1,6 @@
 require 'json'
 require 'jimson'
 require 'toychain-data_structures'
-require 'pry'
-
 module ToyChain
   class NodeServer
     attr_reader :message_pool, :configuration, :server
@@ -22,6 +20,8 @@ module ToyChain
     def start
       @server.start
     end
+
+
 
   end
 end

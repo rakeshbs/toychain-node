@@ -2,15 +2,10 @@ require_relative 'test_helper.rb'
 require 'toychain-data_structures'
 require 'node_server.rb'
 require 'json'
-require 'rack/test'
-require "rack-minitest/json"
-require "rack-minitest/assertions"
 
 module ToyChain
   class TestNode < Minitest::Test
-    include Rack::Test::Methods
-    include Rack::Minitest::JSON
-    include Rack::Minitest::Assertions
+
     def setup
       @message_pool = MessagePool
       @node = NodeServer
@@ -18,7 +13,13 @@ module ToyChain
       contents = File.open(config_file, 'r').read
       @configuration = JSON.parse(contents)
       @n = @node.new(config_file: config_file)
-      @n.start
+      @thread = Thread.new do
+        @n.start
+      end
+    end
+
+    def teardown()
+      Thread.kill(@thread)
     end
 
     def test_create
