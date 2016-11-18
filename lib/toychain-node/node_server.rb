@@ -20,9 +20,7 @@ module ToyChain
     def start
       @server.start
     end
-
-
-
+    
   end
 end
 
